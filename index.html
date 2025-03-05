@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Workinfi Resume</title>
+    <style>
+      .app-loader {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 0.4s ease;
+      }
+      
+      .app-loader.fade-out {
+        opacity: 0;
+      }
+      
+      .loader-content {
+        text-align: center;
+        max-width: 320px;
+        padding: 2rem;
+      }
+      
+      .loader-logo {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 1.5rem;
+        background-color: white;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      
+      .loader-logo svg {
+        width: 40px;
+        height: 40px;
+        color: #2563eb;
+      }
+      
+      .loader-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(255, 255, 255, 0.2);
+        border-top: 3px solid white;
+        border-radius: 50%;
+        margin: 1.5rem auto;
+        animation: spin 1s linear infinite;
+      }
+      
+      .loader-title {
+        color: white;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .loader-message {
+        color: rgba(255, 255, 255, 0.8);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.5;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-loader" id="appLoader">
+      <div class="loader-content">
+        <div class="loader-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <line x1="10" y1="9" x2="8" y2="9"/>
+          </svg>
+        </div>
+        <div class="loader-title">Workinfi Resume</div>
+        <div class="loader-message">Building your professional resume builder experience...</div>
+        <div class="loader-spinner"></div>
+      </div>
+    </div>
+    
+    <div id="root"></div>
+    
+    <script>
+      // Show different loading messages
+      const messages = [
+        "Building your professional resume builder experience...",
+        "Loading templates and components...",
+        "Preparing AI-powered features...",
+        "Setting up your workspace..."
+      ];
+      
+      let messageIndex = 0;
+      const messageElement = document.querySelector('.loader-message');
+      const messageInterval = setInterval(() => {
+        messageIndex = (messageIndex + 1) % messages.length;
+        if (messageElement) {
+          messageElement.textContent = messages[messageIndex];
+        }
+      }, 3000);
+      
+      // Remove loader after page load or timeout
+      window.addEventListener('load', removeLoader);
+      
+      // Fallback timeout to remove loader even if load event doesn't fire
+      const loaderTimeout = setTimeout(removeLoader, 10000);
+      
+      function removeLoader() {
+        clearInterval(messageInterval);
+        clearTimeout(loaderTimeout);
+        
+        const loader = document.getElementById('appLoader');
+        if (loader) {
+          loader.classList.add('fade-out');
+          setTimeout(() => {
+            loader.remove();
+          }, 400);
+        }
+      }
+    </script>
+    
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

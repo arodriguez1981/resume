@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Workinfi Resume</title>
+  </head>
+  <body>
+    <div class="page-loader">
+      <div style="text-align: center;">
+        <div class="page-loader__spinner"></div>
+        <div class="page-loader__text">Loading application...</div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script>
+      // Remove loader after page load
+      window.addEventListener('load', () => {
+        const loader = document.querySelector('.page-loader');
+        if (loader) {
+          loader.classList.add('fade-out');
+          setTimeout(() => {
+            loader.remove();
+          }, 300);
+        }
+      });
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
